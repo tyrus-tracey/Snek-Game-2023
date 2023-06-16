@@ -1,6 +1,6 @@
 #include "stageData.h"
 
-stageData::stageData(unsigned int w, unsigned int h, unsigned int spd, unsigned int goal, Color col)
+stageData::stageData(unsigned int w, unsigned int h, float spd, unsigned int goal, Color col)
 	: width(w), height(h), speed(spd), eggGoal(goal), stageCol(col)
 {
 }
@@ -15,7 +15,7 @@ const unsigned int stageData::getWidth() const
 	return width;
 }
 
-const unsigned int stageData::getSpeed() const
+const float stageData::getSpeed() const
 {
 	return speed;
 }

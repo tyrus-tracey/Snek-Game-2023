@@ -40,7 +40,7 @@ void Game::updateElements(const stageData& stage)
 	brd.update(stage);
 	scoreboard.update(stage);
 	snek.respawn(brd);
-	setNormalSpeed(stage);
+	setGameSpeed(stage);
 	readyAnimCount = 0;
 	ggCount = 0;
 }
@@ -140,12 +140,12 @@ void Game::UpdateModel()
 	/* 
 === Beyond here, the player is live, and the ready anim has completed. === 
 	*/
+	turboMode = wnd.kbd.KeyIsPressed(VK_SPACE);
 
-	gamespeed = wnd.kbd.KeyIsPressed(VK_SPACE) ? getSpeedTurbo() : SPEED_NORMAL;
+	gamespeed = turboMode? getSpeedTurbo() : getStageData().getSpeed();
+	gamespeed = snek.isDead() ? DEATH_ANIM_SPEED : gamespeed;
 
-	//Enough ticks have passed to update the game? (A higher gamespeed val. means slower game)
-	++frameCount;
-	if (frameCount > gamespeed) {
+	if (timer.getDiff() >= gamespeed) {
 		gameCondSnakeInBrd();
 		gameCondSnakeInGfx();
 		gameCondSnakeCollideSelf();
@@ -165,7 +165,7 @@ void Game::UpdateModel()
 		else {
 			snek.iterateDeathAnim();
 		}
-		resetFrameCount(); //Tick threshold met, reset back to zero.
+		timer.updateTimePoint();
 	}
 }
 
@@ -228,7 +228,7 @@ void Game::ComposeFrame()
 	}
 	else { 
 	// At this point, game is still live.
-		if (gamespeed == SPEED_NORMAL) {
+		if (turboMode) {
 			SpriteCodex::DrawBoost_Off(gfx);
 		}
 		else {

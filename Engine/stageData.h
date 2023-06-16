@@ -8,18 +8,18 @@ class stageData
 public:
 	stageData(	unsigned int w, 
 				unsigned int h, 
-				unsigned int spd, 
+				float spd, 
 				unsigned int goal,
 				Color col);
 	const unsigned int getHeight() const;
 	const unsigned int getWidth() const;
-	const unsigned int getSpeed() const;
+	const float getSpeed() const;
 	const unsigned int getGoal() const;
 	const Color getColor() const;
 private:
 	unsigned int height;
 	unsigned int width;
-	unsigned int speed;
+	float speed;
 	unsigned int eggGoal;
 	Color stageCol;
 };

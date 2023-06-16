@@ -50,14 +50,13 @@ private:
 	void gameCondSnakeInBrd(); //exceeds board borders -> kill
 	void gameCondSnakeInGfx(); //exceeds graphics window -> kill
 	void gameCondSnakeCollideSelf(); //hits self -> kill
-	void resetFrameCount() { frameCount = 0; }
 	const stageData getStageData() const { return *stageIter; }
 	void advanceStage();
 	void initStage();
 	void retryStage();
-	void setNormalSpeed(const stageData& stage) { SPEED_NORMAL = stage.getSpeed();}
+	void setGameSpeed(const stageData& stage) { gamespeed = stage.getSpeed();}
 	void updateElements(const stageData& stage);
-	int getSpeedTurbo() const { return SPEED_NORMAL / 2; }
+	float getSpeedTurbo() const { return getStageData().getSpeed() / 2.0f; }
 	bool isEggEaten() const { return snek.getNextMoveLoc() == brd.getEggLoc(); }
 	void togglePause() { paused = paused ? false : true; }
 	/********************************/
@@ -73,26 +72,33 @@ private:
 
 	static const int STAGE_WAIT_TIME = 120;
 
-	unsigned int SPEED_NORMAL;
-	unsigned int gamespeed;
-	unsigned int frameCount = 0;
+	frameTimer timer;
+	float gamespeed;
+	const float DEATH_ANIM_SPEED = 0.05f;
+
 	bool showTitleScreen = true;
 	bool gameComplete = false;
+	bool turboMode = false;
 	bool paused = false;
+	bool pauseKeyLockout = true;
+
+
 	const unsigned int READY_ANIM_LENGTH= 60;
 	unsigned int readyAnimCount = 0;
 	unsigned int readyAnimInterval = 0;
 	const unsigned int GG_LENGTH = 500;
 	unsigned int ggCount = 0;
-	bool pauseKeyLockout = true;
+	
+
+
 
 	// Width, Height, Speed, Goal
 	const std::vector<stageData> stage{
-		stageData(14, 14, 30, 5, Colors::MakeRGB(unsigned char(0),unsigned char(38),unsigned char(125))),
-		stageData( 10,  10,  8, 10, Colors::MakeRGB(unsigned char(265),unsigned char(165),unsigned char(0))),
-		stageData( 5,  8, 10,  9, Colors::Magenta),
-		stageData(60, 24,  2, 30, Colors::White),
-		stageData(10, 10,  6, 30, Colors::MakeRGB(unsigned char(203),unsigned char(27),unsigned char(0))),
+		stageData(	14,	14,	0.5f,	 30, Colors::MakeRGB(unsigned char(0),unsigned char(38),unsigned char(125))),
+		stageData(	10, 10,	0.1f,	10, Colors::MakeRGB(unsigned char(265),unsigned char(165),unsigned char(0))),
+		stageData(	 5,  8, 0.2f,	 9, Colors::Magenta),
+		stageData(	60, 24, 0.05f,	30, Colors::White),
+		stageData(	10, 10, 0.1f,	30, Colors::MakeRGB(unsigned char(203),unsigned char(27),unsigned char(0))),
 	};
 	std::vector<stageData>::const_iterator stageIter = stage.begin();
 	
