@@ -28,6 +28,7 @@
 #include "Snake.h"
 #include "scoreboard.h"
 #include "stageData.h"
+#include "frameTimer.h"
 #include <random>
 
 class Game

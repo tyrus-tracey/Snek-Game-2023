@@ -13,7 +13,6 @@ void frameTimer::updateTimePoint()
 float frameTimer::getDiff()
 {
 	std::chrono::duration<float> output = std::chrono::steady_clock::now() - last;
-	updateTimePoint();
 	return output.count();
 }
 
