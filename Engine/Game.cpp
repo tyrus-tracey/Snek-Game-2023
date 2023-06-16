@@ -229,10 +229,10 @@ void Game::ComposeFrame()
 	else { 
 	// At this point, game is still live.
 		if (turboMode) {
-			SpriteCodex::DrawBoost_Off(gfx);
+			SpriteCodex::DrawBoost_On(gfx);
 		}
 		else {
-			SpriteCodex::DrawBoost_On(gfx);
+			SpriteCodex::DrawBoost_Off(gfx);
 		}
 	}
 	
