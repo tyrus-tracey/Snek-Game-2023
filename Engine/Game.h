@@ -74,7 +74,7 @@ private:
 
 	frameTimer timer;
 	float gamespeed;
-	const float DEATH_ANIM_SPEED = 0.05f;
+	const float DEATH_ANIM_SPEED = 0.025f;
 
 	bool showTitleScreen = true;
 	bool gameComplete = false;
@@ -94,9 +94,9 @@ private:
 
 	// Width, Height, Speed, Goal
 	const std::vector<stageData> stage{
-		stageData(	14,	14,	0.5f,	 30, Colors::MakeRGB(unsigned char(0),unsigned char(38),unsigned char(125))),
-		stageData(	10, 10,	0.1f,	10, Colors::MakeRGB(unsigned char(265),unsigned char(165),unsigned char(0))),
-		stageData(	 5,  8, 0.2f,	 9, Colors::Magenta),
+		stageData(	14,	14,	0.5f,	 7, Colors::MakeRGB(unsigned char(0),unsigned char(38),unsigned char(125))),
+		stageData(	10, 10,	0.25f,	10, Colors::MakeRGB(unsigned char(265),unsigned char(165),unsigned char(0))),
+		stageData(	 5,  8, 0.3f,	 9, Colors::Magenta),
 		stageData(	60, 24, 0.05f,	30, Colors::White),
 		stageData(	10, 10, 0.1f,	30, Colors::MakeRGB(unsigned char(203),unsigned char(27),unsigned char(0))),
 	};
